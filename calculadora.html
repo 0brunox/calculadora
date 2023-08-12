@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Backdrop</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(to right, #c2a0e8, #3677a2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            width: 100%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .dimensions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dimensions input {
+            width: 45%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <p>Escolha, dimensione e estime o valor do backdrop.</p>
+        <select id="backdropType">
+            <option value="boxtruss_envelopado">Boxtruss Envelopado</option>
+            <option value="boxtruss_estrutura">Boxtruss com Estrutura Aparente</option>
+            <option value="backdrop_caixa">Backdrop Envelopado Tipo Caixa</option>
+        </select>
+        <div class="dimensions">
+            <input type="number" id="width" placeholder="Largura em metros" />
+            <input type="number" id="height" placeholder="Altura em metros" />
+        </div>
+        <button onclick="calculate()">Calcular</button>
+        <div id="result"></div>
+        <p>Esta é apenas uma estimativa de preços. O valor final pode variar de acordo com outros fatores, como local do evento, data e horário de montagem, tempo de aluguel, etc. Para receber um orçamento detalhado, por favor, entre em contato conosco.</p>
+        <p>Pronto para realizar o seu evento com um dos nossos backdrops?</p>
+        <p>Entre em contato através de um dos nossos canais de atendimento. Respondemos rapidamente!</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        function calculate() {
+            var type = document.getElementById("backdropType").value;
+            var width = document.getElementById("width").value;
+            var height = document.getElementById("height").value;
+            var pricePerSquareMeter;
+
+            switch (type) {
+                case 'boxtruss_envelopado':
+                    pricePerSquareMeter = 250;
+                    break;
+                case 'boxtruss_estrutura':
+                    pricePerSquareMeter = 200;
+                    break;
+                case 'backdrop_caixa':
+                    pricePerSquareMeter = 230;
+                    break;
+            }
+
+            var total = width * height * pricePerSquareMeter;
+            document.getElementById("result").innerHTML = "A estimativa de custo é: R$ " + total;
+
+            // Animação
+            anime({
+                targets: '#result',
+                translateY: [-10, 0],
+                opacity: [0, 1],
+                duration: 1000,
+                easing: 'easeOutElastic(1, .5)'
+            });
+        }
+    </script>
+</body>
+</html>
